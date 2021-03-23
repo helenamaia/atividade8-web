@@ -44,3 +44,16 @@ console.log(gato.alimentosFavoritos);
 for (const alimento of gato.alimentosFavoritos) {
     console.log(`Alimento: ${alimento}`);
 }
+
+const veiculo ={
+    modelo: 'Fusca',
+    marca: 'VM'
+}
+console.log(veiculo.ano);
+console.log(veiculo.modelo);
+
+veiculo.ano = 1965;
+
+console.log(veiculo.ano);
+console.log(veiculo.modelo);
+console.log(veiculo);
