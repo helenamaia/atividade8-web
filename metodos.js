@@ -6,11 +6,14 @@ const pessoa = {
     },
     anoNascimento:1988,
     CalculaIdade : function(anoAtual){
-        return parseInt(anoAtual) - parseInt(this.anoNascimento);
+        this.idade = parseInt(anoAtual) - parseInt(this.anoNascimento);
+        return this.idade;
     }
 };
 
 console.log(pessoa);
 console.log(pessoa.CalculaIdade(2021));
+console.log(`Ìdade armazenada em atributo: ${pessoa.idade}`);
+
 
 
