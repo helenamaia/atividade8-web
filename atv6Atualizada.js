@@ -14,8 +14,8 @@ const calcularGorjeta = function(){
     }
     return this.gorjeta;
 }
-const toString = function(){
-    console.log(`${nome} - [Valor: R$ ${conta} | Gorjeta: R$ ${gorjeta} | Total: R$ ${valorT}]`);
+toString = function(){
+    console.log(`${this.nome} - [Valor: R$ ${this.conta} | Gorjeta: R$ ${this.gorjeta} | Total: R$ ${this.valorTotal}]`);
 }
 
 const calcularValorTotal = function(){
@@ -30,27 +30,68 @@ for (let i = 0; i < numRestaurantes; i++) {
     const restaurante = {
         nome : nomeRestaurante,
         conta : valorConta,
-        gorjeta : undefined,
-        valorTotal : undefined,
         calcularGorjeta,
         calcularValorTotal,
         toString,
     }
     restaurante.calcularGorjeta(); 
     restaurante.calcularValorTotal();
-    restaurante.toString();  
+     
     restaurantes.push(restaurante);
 }
 
-
-for (let i = 0; i < numRestaurantes; i++) {
-        
-    let nome = restaurantes[i].nome;
-    const conta = restaurantes[i].conta;
-    const gorjeta = restaurantes[i].gorjeta;
-    const valorT = restaurantes[i].valorTotal;
-    console.log(`${nome} - [Valor: R$ ${conta} | Gorjeta: R$ ${gorjeta} | Total: R$ ${valorT}]`);
+  restaurantes.calcularGastoTotal = function(){
+    let gastoTotal = 0;
+    for (let i = 0; i < numRestaurantes; i++) {
+        gastoTotal = parseFloat(gastoTotal) + parseFloat(restaurantes[i].valorTotal);
+    }
+    return gastoTotal;
 }
+
+ restaurantes.mediaGastosTotais = function(){
+    const total = restaurantes.calcularGastoTotal();
+    const media = parseFloat(total)/parseInt(numRestaurantes);
+    return media; 
+}
+
+restaurantes.maiorGasto = function(){
+    let maiorValor = 0;
+    let nomeMaiorValor;
+    for (let i = 0; i < numRestaurantes; i++) {
+        if(maiorValor<restaurantes[i].valorTotal){
+            maiorValor = restaurantes[i].valorTotal;
+            nomeMaiorValor = restaurantes[i].nome;
+        }
+        
+    }
+
+    for (let i = 0; i < numRestaurantes; i++) {
+        if(nomeMaiorValor === restaurantes[i].nome){
+            return restaurantes[i];
+        }
+    }
+}
+
+restaurantes.imprimir = function(){
+    console.log(`Restaurantes visitados no feriado: ${numRestaurantes}`);
+    console.log(`Lista de gastos:`);
+    for (let i = 0; i < numRestaurantes; i++) {
+        restaurantes[i].toString();
+    }
+   
+    console.log(`Total gasto: ${restaurantes.calcularGastoTotal()}`);
+    
+    console.log(`Média de gastos: ${restaurantes.mediaGastosTotais()}`);
+
+    const maior = restaurantes.maiorGasto();
+    console.log(`Restaurante com maior gasto total: ${maior.nome}(${maior.valorTotal})`);
+    
+
+}
+
+restaurantes.imprimir();
+
+
 
    
 
